@@ -25,7 +25,7 @@ public class TestAtomikos implements ITest{
     /**
      * 测试正常情况
      */
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, value = "jtaTransactionManager")
     public void test() {
         testOneJdbcTemplate.execute("insert into user (name, age) values ('张三', 18);");
         testTwoJdbcTemplate.execute("insert into user (name, age) values ('李四', 20);");
@@ -34,10 +34,10 @@ public class TestAtomikos implements ITest{
     /**
      * 测试异常情况
      */
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class, value = "jtaTransactionManager")
     public void testByException() {
         testOneJdbcTemplate.execute("insert into user (name, age) values ('张三', 18);");
-        int i = 1/0;
         testTwoJdbcTemplate.execute("insert into user (name, age) values ('李四', 20);");
+        int i = 1/0;
     }
 }

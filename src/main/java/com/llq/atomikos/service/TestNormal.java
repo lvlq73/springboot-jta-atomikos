@@ -22,8 +22,10 @@ public class TestNormal implements ITest{
     private JdbcTemplate testTwoNormalJdbcTemplate;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void test() {
-
+        testOneNormalJdbcTemplate.execute("insert into user (name, age) values ('张三', 18);");
+        testTwoNormalJdbcTemplate.execute("insert into user (name, age) values ('李四', 20);");
     }
 
     /**
@@ -32,7 +34,7 @@ public class TestNormal implements ITest{
     @Transactional(rollbackFor = Exception.class)
     public void testByException() {
         testOneNormalJdbcTemplate.execute("insert into user (name, age) values ('张三', 18);");
-        int i = 1/0;
         testTwoNormalJdbcTemplate.execute("insert into user (name, age) values ('李四', 20);");
+        int i = 1/0;
     }
 }
