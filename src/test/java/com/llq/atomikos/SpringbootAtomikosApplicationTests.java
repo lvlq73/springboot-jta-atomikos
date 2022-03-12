@@ -12,14 +12,12 @@ import org.springframework.context.ApplicationContext;
 class SpringbootAtomikosApplicationTests {
 
     //使用atomikos
-//    private static Class CLS = TestAtomikos.class;
+    private static Class CLS = TestAtomikos.class;
     //正常情况
-    private static Class CLS = TestNormal.class;
+//    private static Class CLS = TestNormal.class;
 
     @Autowired
     ApplicationContext applicationContext;
-
-
 
     @Test
     public void test() {
